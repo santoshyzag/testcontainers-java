@@ -10,9 +10,6 @@ cache:
   directories:
     - '$HOME/.gradle'
 
-install:
-  - ./gradlew build -x check
-
 jobs:
   include:
     - stage: test
@@ -40,7 +37,7 @@ jobs:
                 -v "$(pwd)":"$(pwd)" \
                 -w "$(pwd)" \
                 openjdk:8-jdk-alpine \
-                ./gradlew testcontainers:test --tests '*GenericContainerRuleTest'
+                ./gradlew --no-build-cache testcontainers:test --tests '*GenericContainerRuleTest'
 
     - stage: deploy
       sudo: false
